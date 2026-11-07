@@ -1,0 +1,253 @@
+* {
+  box-sizing: border-box;
+}
+
+body {
+  background-color: #EAEAFA;
+  font-family: 'EB Garamond', serif;
+  font-size: 20px;
+  margin: 0;
+  padding: 0;
+}
+
+h1 {
+  white-space: normal;
+  text-align: center;
+  text-transform: uppercase;
+  font-family: 'Playfair Display', serif;
+  font-size: 28px;
+}
+
+h2 {
+  width: 100%;
+  white-space: normal;
+  text-align: center;
+  text-transform: uppercase;
+  font-family: 'Playfair Display', serif;
+  font-size: 24px;
+}
+
+/* FIX: Responsive padding & margins for paragraphs */
+p {
+  margin: 30px auto;
+  padding: 0 20px;
+  max-width: 900px;
+  text-indent: 20px;
+  text-align: justify;
+  letter-spacing: 0.5px;
+  font-family: 'Playfair Display', serif;
+  font-size: 18px;
+  line-height: 1.6;
+}
+
+/* FIX: Responsive Navbar wrapping for mobile */
+.w3-bar {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+}
+
+.w3-bar button {
+  margin: 2px 4px;
+  font-size: 14px;
+}
+
+.w3-top .w3-bar.w3-deep-purple .w3-button:hover {
+  background-color: #4730b9;
+  color: rgb(191, 217, 243);
+}
+
+.art {
+  display: none;
+  padding-top: 80px;
+} 
+
+#Home {
+  display: block;
+}
+
+#Collections {
+  padding-top: 80px;
+}
+
+/* GALLERY LAYOUT */
+div.gallery {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  padding: 10px;
+}
+
+div.gallery-item {
+  margin: 10px;
+  border: none;
+  width: calc(33.333% - 20px);
+  position: relative;
+  overflow: hidden;
+}
+
+div.gallery-item img {
+  width: 100%;
+  height: auto;
+  display: block;
+  transition: transform 0.5s ease;
+}
+
+.rounded-img {
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+/* DESKTOP HOVER OVERLAYS */
+@media (hover: hover) {
+  .gallery-item::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background-color: rgba(0, 0, 0, 0.6);
+    opacity: 0;
+    transition: 0.5s ease;
+    pointer-events: none;
+  }
+
+  .gallery-item:hover::after {
+    opacity: 1;
+  }
+
+  .overlay-text {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 15px;
+    color: #fff;
+    font-size: 16px;
+    text-align: center;
+    opacity: 0;
+    transition: 0.5s ease;
+    z-index: 2;
+    pointer-events: none;
+  }
+
+  .gallery-item:hover .overlay-text {
+    opacity: 1;
+  }
+
+  .gallery-item:hover img {
+    transform: scale(1.05);
+  }
+}
+
+/* MOBILE RESPONSIVE MEDIA QUERIES */
+@media only screen and (max-width: 768px) {
+  div.gallery-item {
+    width: calc(50% - 20px);
+  }
+
+  p {
+    margin: 20px auto;
+    font-size: 16px;
+    text-indent: 0;
+  }
+}
+
+@media only screen and (max-width: 480px) {
+  div.gallery-item {
+    width: 100%;
+    margin: 10px 0;
+  }
+
+  /* FIX: Ensure overlay captions are visible under images on mobile/touch screens */
+  .overlay-text {
+    position: relative;
+    opacity: 1;
+    background: rgba(0, 0, 0, 0.7);
+    color: #fff;
+    padding: 10px;
+    font-size: 14px;
+  }
+}
+
+/* QUOTE BOX LAYOUT */
+.gallery-item.quote-layout {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+}
+
+.quote-box {
+  width: 100%;
+  max-width: 450px;
+  padding: 30px 20px;
+  border: 3px solid purple;
+  text-align: center;
+  font-family: 'Playfair Display', serif;
+  font-size: 20px;
+  line-height: 1.5;
+}
+
+.gallery-item.quote-layout::after { display: none; }
+.gallery-item.quote-layout .overlay-text { display: none; }
+
+/* MODAL STYLES */
+.modal {
+  display: none; 
+  position: fixed; 
+  z-index: 9999; 
+  left: 0;
+  top: 0;
+  width: 100%; 
+  height: 100%; 
+  background-color: rgba(0,0,0,0.9); 
+  align-items: center;
+  justify-content: center;
+}
+
+.modal.show {
+  display: flex; 
+}
+
+.modal-content {
+  display: block;
+  margin: auto;
+  max-width: 90%;
+  max-height: 75vh;
+  object-fit: contain;
+  animation: zoomIn 0.4s ease;
+}
+
+@keyframes zoomIn {
+  from { transform: scale(0.7); }
+  to { transform: scale(1); }
+}
+
+#imageModal .close {
+  position: absolute;
+  top: 15px;
+  right: 25px;
+  font-size: 35px;
+  color: #f1f1f1;
+  font-weight: bold;
+  cursor: pointer;
+  z-index: 10000;
+}
+
+.modal-inner {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+}
+
+#modalCaption {
+  margin-top: 15px;
+  width: 85%;
+  text-align: center;
+  color: #ffffff;
+  font-size: 16px;
+  line-height: 1.4;
+}
